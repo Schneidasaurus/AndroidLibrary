@@ -10,15 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentLeft="true"
-        android:text="Item Details"
+        android:text="Library"
         android:textColor="#FFFFFF"
         android:background="#0000FF"
         android:paddingLeft="15dp"
         android:paddingTop="15dp"
         android:textSize="25dp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp" />
+        android:textStyle="bold"/>
 
     <ImageView
         android:id="@+id/account_icon"
@@ -47,23 +45,23 @@
         android:background="#0000FF"/>
 
     <Button
-        android:id="@+id/checkin_button"
+        android:id="@+id/internal_button"
         android:layout_width="150dp"
         android:layout_height="30dp"
         android:layout_marginTop="62dp"
         android:background="#000080"
-        android:text="CheckIn"
+        android:text="Local Library"
         android:textColor="#FFFFFF"
         android:textSize="16dp"
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/checkout_button"
+        android:id="@+id/external_button"
         android:layout_width="150dp"
         android:layout_height="30dp"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="152dp"
-        android:text="CheckOut"
+        android:text="Remote Library"
         android:textStyle="bold"
         android:textSize="16dp"
         android:background="#0000FF"

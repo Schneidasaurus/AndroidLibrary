@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MemberData>
-    <Member id="u000016" name="Sir Loin" password="55555" ></Member>
-    <Member id="u000017" name="Max Hedrom" password="77777" ></Member>
-    <Member id="u000018" name="Ricky Rubio" password="11111" ></Member>
+    <Member id="u000016" name="Sir Loin" password="55555" privilege="500" ></Member>
+    <Member id="u000017" name="Max Hedrom" password="77777" privilege="100"></Member>
+    <Member id="u000018" name="Ricky Rubio" password="11111" privilege="100"></Member>
+    <Member id="u000019" name="Dom Smith" password="00000" privilege="500"></Member>
 </MemberData>

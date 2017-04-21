@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context="com.metadata.androidlibrary.MainActivity">
 
     <TextView
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentLeft="true"
@@ -39,17 +41,28 @@
         />
 
     <TextView
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:layout_marginTop="62dp"
+    android:background="#0000FF"/>
+
+    <ListView
+        android:id="@+id/display"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="62dp"
-        android:background="#0000FF"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:textSize="14dp"
+        android:dividerHeight="2dp"
+        android:divider="#0000FF"
+        />
+
 
     <Button
         android:id="@+id/internal_button"
         android:layout_width="150dp"
         android:layout_height="30dp"
         android:layout_marginTop="62dp"
-        android:background="#000080"
+        android:background="#0000FF"
         android:text="Local Library"
         android:textColor="#FFFFFF"
         android:textSize="16dp"

@@ -4,4 +4,5 @@
     <drawable name="darkblue">#000080</drawable>
     <drawable name="white">#FFFFFF</drawable>
     <drawable name="black">#000000</drawable>
+    <drawable name="lightblue">#80BFFF</drawable>
 </resources>

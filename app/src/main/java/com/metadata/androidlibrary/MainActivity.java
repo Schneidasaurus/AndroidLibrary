@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private String memberID;
     private String memberName;
     private Intent i;
-    private ArrayList<InventoryItem> xmlData;
-    private ArrayList<InventoryItem> jsonData;
+    private ArrayList<LibraryItem> xmlData;
+    private ArrayList<LibraryItem> jsonData;
     private ListView itemList;
     private LibraryAdapter adapter;
     private LibraryAdapter adapter2;
@@ -50,15 +50,18 @@ public class MainActivity extends AppCompatActivity {
 
         //load XML file
         try {
-            InputStream input = getAssets().open("testLib.xml");
+            InputStream input = getAssets().open("externalitem.xml");
             InputStream input2 = getAssets().open("JSONLib.json");
             xmlData = fp.processXMLData(input);
-        } catch (IOException e) {e.printStackTrace();} catch (ParserConfigurationException e) {
+            jsonData = fp.processJSONData(input2);
+        } catch (IOException e) {e.printStackTrace();}  catch (ParseException e) {
             e.printStackTrace();
+        } catch (ParserConfigurationException e) {e.printStackTrace();
         } catch (SAXException e) {e.printStackTrace();}
 
 
-        adapter = new LibraryAdapter(getApplicationContext(), xmlData);
+        adapter = new LibraryAdapter(getApplicationContext(), jsonData);
+        adapter2 = new LibraryAdapter(getApplicationContext(), xmlData);
         itemList.setAdapter(adapter);
         internal.setClickable(false);
         internal.setBackgroundColor(Color.parseColor("#000080"));
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         internal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                itemList.setAdapter(adapter);
                 external.setBackgroundColor(Color.parseColor("#0000FF"));
                 internal.setBackgroundColor(Color.parseColor("#000080"));
                 internal.setClickable(false);
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         external.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                itemList.setAdapter(adapter2);
                 external.setBackgroundColor(Color.parseColor("#000080"));
                 internal.setBackgroundColor(Color.parseColor("#0000FF"));
                 internal.setClickable(true);
@@ -99,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ItemActivity.class);
                 String holdID = (String) view.getTag();
                 intent.putExtra("item_id", holdID);
+                intent.putExtra("member_id", memberID);
+                intent.putExtra("member_name", memberName);
                 MainActivity.this.startActivity(intent);
             }
         });

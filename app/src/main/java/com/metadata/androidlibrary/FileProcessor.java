@@ -1,13 +1,10 @@
 package com.metadata.androidlibrary;
-import android.content.res.XmlResourceParser;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.xml.sax.SAXException;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 import java.util.ArrayList;
 import java.io.*;
@@ -21,8 +18,8 @@ import com.metadata.LibraryDomain.*;
 
 public class FileProcessor {
 
-    private ArrayList<InventoryItem> libItem = new ArrayList<InventoryItem>();
-    private ArrayList<InventoryItem> libItem2 = new ArrayList<InventoryItem>();
+    private ArrayList<LibraryItem> libItem = new ArrayList<LibraryItem>();
+    private ArrayList<LibraryItem> libItem2 = new ArrayList<LibraryItem>();
     private Library library = new Library();
     private MemberList memberList = new MemberList();
     private com.metadata.LibraryDomain.Member member;
@@ -79,7 +76,7 @@ public class FileProcessor {
 
 
     //read XML file for library items
-    public ArrayList<InventoryItem> processXMLData(InputStream inputStream) throws ParserConfigurationException, SAXException, IOException{
+    public ArrayList<LibraryItem> processXMLData(InputStream inputStream) throws ParserConfigurationException, SAXException, IOException{
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document doc = builder.parse(inputStream);
@@ -131,18 +128,7 @@ public class FileProcessor {
                     }
                 }
 
-                if(itemType.equals(XML_CD)) {
-                    libItem.add(new CD(itemID, itemName, itemType, artist, itemDueDate, itemCheckOutDate, checkedOutTo));
-                }
-                if(itemType.equals(XML_DVD)){
-                    libItem.add(new DVD(itemID, itemName, itemType, itemDueDate, itemCheckOutDate, checkedOutTo));
-                }
-                if(itemType.equals(XML_BOOK)) {
-                    libItem.add(new Book(itemID, itemName, itemType, author, itemDueDate, itemCheckOutDate, checkedOutTo));
-                }
-                if(itemType.equals(XML_MAGAZINE)) {
-                    libItem.add(new Magazine(itemID, itemName, itemType, volume, itemDueDate, itemCheckOutDate, checkedOutTo));
-                }
+                    libItem.add(new LibraryItem(itemName, itemType, itemID, "", "", ""));
             }
         }
         return libItem;
@@ -186,14 +172,26 @@ public class FileProcessor {
         return memberList;
     }
 
-    public ArrayList<InventoryItem> processJSONData(InputStream input) throws ParseException, FileNotFoundException, IOException {
+    public ArrayList<LibraryItem> processJSONData(InputStream input) throws ParseException, FileNotFoundException, IOException {
 
-        ArrayList<InventoryItem> itemList = new ArrayList<InventoryItem>();
-        InputStream inputStream = input;
-        return libItem2;
+        ArrayList<LibraryItem> itemList = new ArrayList<>();
+        JSONParser parser = new JSONParser();
+        jsonObject = (JSONObject) parser.parse(new InputStreamReader(input));
+
+        if (jsonObject.get(LIBRARY_ITEMS) != null) {
+            for (Object jArrayItem : (JSONArray) jsonObject.get("library_items")) {
+
+                JSONObject arrayItem = (JSONObject) jArrayItem;
+
+                String item_name = (String) arrayItem.get("item_name");
+                String item_id = (String) arrayItem.get("item_id");
+                String item_type = (String) arrayItem.get("item_type");
+
+                itemList.add(new LibraryItem(item_name, item_type, item_id, "", "", ""));
+            }
+        }
+
+        return itemList;
     }
-
-
-    
 }
 

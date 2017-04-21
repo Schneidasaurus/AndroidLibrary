@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class LibraryAdapter extends BaseAdapter
 {
     private Context context;
-    ArrayList<InventoryItem> lt;
+    ArrayList<LibraryItem> lt;
 
-    public LibraryAdapter(Context context, ArrayList<InventoryItem> lt) {
+    public LibraryAdapter(Context context, ArrayList<LibraryItem> lt) {
         this.context = context;
         this.lt =lt;
     }
@@ -46,11 +46,11 @@ public class LibraryAdapter extends BaseAdapter
         TextView name = (TextView) view.findViewById(R.id.item_name);
         TextView type = (TextView) view.findViewById(R.id.item_type);
 
-        id.setText("Item ID:          " + lt.get(position).getID());
-        name.setText("Item Name:   " + lt.get(position).getName());
-        type.setText("Item Type:      " + lt.get(position).getType());
+        id.setText("Item ID:          " + lt.get(position).getItemId());
+        name.setText("Item Name:   " + lt.get(position).getItemName());
+        type.setText("Item Type:      " + lt.get(position).getItemType());
 
-        view.setTag(lt.get(position).getID());
+        view.setTag(lt.get(position).getItemId());
 
         return view;
     }
